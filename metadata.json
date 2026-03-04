@@ -1,0 +1,5 @@
+{
+  "name": "Sky Explorer Simulator",
+  "description": "A world game simulator where you explore real locations using a plane and Google Maps grounding for discovery.",
+  "requestFramePermissions": ["geolocation"]
+}
