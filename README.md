@@ -2,6 +2,11 @@
 
 Open Map is an interactive flight-simulation dashboard that combines a live map, cockpit-style telemetry, mission tracking, and AI-generated area intelligence. It is designed to feel like a small flight-control environment where the user can move through the world, scan locations, discover landmarks, and review the surrounding context in a polished UI.
 
+## Live demo
+
+- Vercel deployment: https://open-map-ashy.vercel.app/
+- Browser branding: the app tab is now labeled **Open Map**
+
 ## Project description
 
 This project is a React + Express application that gives the user a playful but functional way to explore a geographic area. The frontend simulates motion, displays telemetry, and presents discovered landmarks, while the backend handles request validation, caching, and AI fallback behavior.
