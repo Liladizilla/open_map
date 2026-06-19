@@ -76,6 +76,11 @@ export default function App() {
     missionTimer: 0,
   });
 
+  const allLandmarksRef = useRef<Landmark[]>([]);
+  useEffect(() => {
+    allLandmarksRef.current = allLandmarks;
+  }, [allLandmarks]);
+
   // Geolocation support
   useEffect(() => {
     if ("geolocation" in navigator) {
@@ -167,7 +172,7 @@ export default function App() {
         }
 
         if (m.type === 'discovery') {
-          const count = allLandmarks.length;
+          const count = allLandmarksRef.current.length;
           if (count >= 3) return { ...m, isCompleted: true, progress: 100 };
           return { ...m, progress: (count / 3) * 100 };
         }
