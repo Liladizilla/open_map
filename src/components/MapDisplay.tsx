@@ -5,8 +5,7 @@ import { Plane } from './Plane';
 import { renderToStaticMarkup } from 'react-dom/server';
 
 import { MapPin, Target } from 'lucide-react';
-import { Landmark } from '../services/gemini';
-import { Mission } from '../App';
+import { Landmark, Mission } from '../types';
 
 interface MapDisplayProps {
   position: [number, number];

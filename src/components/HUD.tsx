@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Compass, Wind, Navigation, MapPin, Search, AlertCircle, Save, Download, CheckCircle2, Loader2, Trophy, Target, Timer, Eye, EyeOff, X, Grid, Info } from 'lucide-react';
+import { Compass, Wind, Navigation, MapPin, Search, Save, Download, CheckCircle2, Loader2, Trophy, Target, Eye, EyeOff, X, Grid, Info } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import ReactMarkdown from 'react-markdown';
-import { Mission } from '../App';
+import { BriefingSource, DiscoveryState, Mission } from '../types';
 
 interface HUDProps {
   lat: number;
@@ -10,12 +10,7 @@ interface HUDProps {
   speed: number;
   altitude: number;
   heading: number;
-  discovery: {
-    text: string;
-    groundingChunks: any[];
-    landmarks: any[];
-    loading: boolean;
-  } | null;
+  discovery: DiscoveryState | null;
   onScan: () => void;
   onSave: () => void;
   onLoad: () => void;
@@ -32,6 +27,11 @@ export const HUD: React.FC<HUDProps> = ({
   missions, activeMissionId, onSelectMission, isFreeLook, onToggleFreeLook
 }) => {
   const activeMission = missions.find(m => m.id === activeMissionId);
+  const sourceLabel: Record<BriefingSource, string> = {
+    cache: 'CACHE',
+    gemini: 'LIVE',
+    offline: 'OFFLINE',
+  };
 
   // States to toggle visibility of individual cockpit instrument panels
   const [showAvionics, setShowAvionics] = useState(true);
@@ -45,10 +45,10 @@ export const HUD: React.FC<HUDProps> = ({
   const [showDashboardController, setShowDashboardController] = useState(true);
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-[1000] flex flex-col justify-between p-6">
+    <div className="fixed inset-0 pointer-events-none z-1000 flex flex-col justify-between p-6">
       
       {/* Central Avionics Control Dashboard Menu (Top Center) */}
-      <div className="absolute top-6 left-1/2 -translate-x-1/2 pointer-events-auto z-[2000] flex flex-col items-center">
+      <div className="absolute top-6 left-1/2 -translate-x-1/2 pointer-events-auto z-2000 flex flex-col items-center">
         {showDashboardController ? (
           <motion.div 
             initial={{ opacity: 0, y: -20, scale: 0.95 }}
@@ -268,7 +268,7 @@ export const HUD: React.FC<HUDProps> = ({
                       />
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-[9px] text-white/40 uppercase tracking-tighter block max-w-[200px] truncate">
+                      <span className="text-[9px] text-white/40 uppercase tracking-tighter block max-w-50 truncate">
                         {activeMission.isCompleted ? 'Objective Complete' : activeMission.description}
                       </span>
                       {activeMission.isCompleted && <CheckCircle2 size={12} className="text-green-500" />}
@@ -367,14 +367,14 @@ export const HUD: React.FC<HUDProps> = ({
       {/* Bottom: Discovery & Controls */}
       <div className="flex justify-between items-end">
         {/* Discovery Panel */}
-        <div className="w-[380px] max-w-[90vw] pointer-events-auto">
+        <div className="w-95 max-w-[90vw] pointer-events-auto">
           <AnimatePresence>
             {showAreaIntel && discovery && (
               <motion.div
                 initial={{ opacity: 0, y: 20, scale: 0.95 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: 20, scale: 0.95 }}
-                className="cockpit-panel p-5 rounded-2xl mb-3 max-h-[320px] overflow-y-auto custom-scrollbar flex flex-col"
+                className="cockpit-panel p-5 rounded-2xl mb-3 max-h-80 overflow-y-auto custom-scrollbar flex flex-col"
               >
                 <div className="flex items-center justify-between mb-3 border-b border-white/10 pb-2">
                   <div className="flex items-center gap-2">
@@ -382,6 +382,11 @@ export const HUD: React.FC<HUDProps> = ({
                     <h3 className="text-white text-xs font-semibold tracking-wide">Area Airspace Intelligence</h3>
                   </div>
                   <div className="flex items-center gap-1.5">
+                    {discovery.source && (
+                      <span className="rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-[9px] font-mono uppercase tracking-widest text-white/70">
+                        {sourceLabel[discovery.source]}
+                      </span>
+                    )}
                     {discovery.loading && (
                       <motion.div
                         animate={{ rotate: 360 }}
@@ -479,7 +484,7 @@ export const HUD: React.FC<HUDProps> = ({
                   </button>
                 </div>
 
-                <div className="space-y-1.5 max-h-[160px] overflow-y-auto custom-scrollbar pr-1">
+                <div className="space-y-1.5 max-h-40 overflow-y-auto custom-scrollbar pr-1">
                   {missions.map(m => (
                     <button
                       key={m.id}

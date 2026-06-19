@@ -10,6 +10,7 @@
 /* Custom styles for the cockpit feel */
 .cockpit-panel {
   background: rgba(20, 20, 20, 0.85);
+  -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
@@ -48,6 +49,10 @@
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
+}
+
+.plane-rotation {
+  transform-origin: center;
 }
 
 .landmark-marker {

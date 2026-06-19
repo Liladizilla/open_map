@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Eiffel Tower",
+    "lat": 48.8584,
+    "lng": 2.2945,
+    "description": "A famous 19th-century wrought-iron lattice tower on the Champ de Mars, standing 330 meters tall."
+  },
+  {
+    "name": "Louvre Museum",
+    "lat": 48.8606,
+    "lng": 2.3376,
+    "description": "The world's largest art museum and a historic monument in Paris."
+  },
+  {
+    "name": "Arc de Triomphe",
+    "lat": 48.8738,
+    "lng": 2.295,
+    "description": "One of the most famous monuments in Paris, standing at the western end of the Champs-Élysées."
+  },
+  {
+    "name": "Big Ben",
+    "lat": 51.5007,
+    "lng": -0.1246,
+    "description": "The iconic clock tower at the north end of the Palace of Westminster in London."
+  },
+  {
+    "name": "Tower Bridge",
+    "lat": 51.5055,
+    "lng": -0.0754,
+    "description": "A combined bascule and suspension bridge in London over the River Thames."
+  },
+  {
+    "name": "Statue of Liberty",
+    "lat": 40.6892,
+    "lng": -74.0445,
+    "description": "A colossal neoclassical copper sculpture on Liberty Island in New York Harbor."
+  },
+  {
+    "name": "Golden Gate Bridge",
+    "lat": 37.8199,
+    "lng": -122.4783,
+    "description": "An internationally recognized suspension bridge spanning the Golden Gate."
+  },
+  {
+    "name": "Tokyo Tower",
+    "lat": 35.6586,
+    "lng": 139.7454,
+    "description": "A red-and-white communications and observation tower in Tokyo."
+  },
+  {
+    "name": "Sydney Opera House",
+    "lat": -33.8568,
+    "lng": 151.2153,
+    "description": "A multi-venue performing arts centre in Sydney, Australia."
+  },
+  {
+    "name": "Colosseum",
+    "lat": 41.8902,
+    "lng": 12.4922,
+    "description": "A breathtaking oval amphitheatre in the heart of Rome."
+  }
+]
